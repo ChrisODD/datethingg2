@@ -1,27 +1,602 @@
-<p class="sub">Here's what we're locking in:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Question for Zy 🐾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #fff6ef;
+    --blush: #ffdbe6;
+    --rose: #ff6f9c;
+    --rose-dark: #e2497a;
+    --caramel: #e8a87c;
+    --caramel-dark: #c47f52;
+    --plum: #4a2b45;
+    --plum-soft: #7a5673;
+    --mint: #bfe9d7;
+    --shadow: rgba(74, 43, 69, 0.18);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body{
+    font-family: 'Quicksand', sans-serif;
+    background: radial-gradient(circle at 20% 20%, #fff0e9, var(--cream) 45%),
+                linear-gradient(160deg, var(--cream), var(--blush) 120%);
+    color: var(--plum);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 24px;
+  }
+
+  /* ---------- floating background ---------- */
+  #bg-layer{
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .drift{
+    position: absolute;
+    bottom: -60px;
+    opacity: 0.55;
+    animation-name: floatUp;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 4px 6px rgba(74,43,69,0.08));
+    user-select: none;
+  }
+
+  @keyframes floatUp{
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ---------- card ---------- */
+  .stage{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 480px;
+    background: #fffdfb;
+    border-radius: 32px;
+    padding: 40px 32px 34px;
+    box-shadow: 0 24px 60px var(--shadow), 0 2px 0 #fff inset;
+    border: 3px solid #ffffff;
+    outline: 6px solid rgba(255, 214, 224, 0.6);
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  @keyframes popIn{
+    from{ transform: scale(0.85); opacity: 0; }
+    to{ transform: scale(1); opacity: 1; }
+  }
+
+  .hidden{ display: none !important; }
+
+  .eyebrow{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rose-dark);
+    background: var(--blush);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  h1{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.25;
+    margin: 0 0 8px;
+    color: var(--plum);
+  }
+
+  h1 .name{ color: var(--rose-dark); }
+
+  p.sub{
+    font-size: 15px;
+    color: var(--plum-soft);
+    margin: 0 0 22px;
+    line-height: 1.5;
+  }
+
+  /* ---------- mascot cat ---------- */
+  .mascot{
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 6px;
+    position: relative;
+  }
+
+  .mascot svg{ width: 100%; height: 100%; overflow: visible; }
+
+  .pupil{ transition: transform 0.12s ease-out; }
+
+  .tail{
+    transform-origin: 60px 150px;
+    animation: wag 2.4s ease-in-out infinite;
+  }
+  @keyframes wag{
+    0%, 100% { transform: rotate(-8deg); }
+    50%      { transform: rotate(10deg); }
+  }
+
+  .whisker{ opacity: 0.55; }
+
+  /* ---------- buttons row ---------- */
+  .btn-row{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 22px;
+    min-height: 64px;
+  }
+
+  .btn{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 30px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 8px 0 rgba(0,0,0,0.08);
+  }
+
+  .btn-yes{
+    background: linear-gradient(180deg, #ff8fb3, var(--rose));
+    color: #fff;
+    box-shadow: 0 8px 0 var(--rose-dark);
+  }
+  .btn-yes:hover{ transform: translateY(-2px) scale(1.06); }
+  .btn-yes:active{ transform: translateY(2px); box-shadow: 0 4px 0 var(--rose-dark); }
+
+  .btn-no{
+    background: #fff;
+    color: var(--plum-soft);
+    border: 2px solid var(--blush);
+    box-shadow: 0 6px 0 var(--blush);
+    position: absolute;
+    left: 50%;
+    transform: translateX(56px);
+  }
+
+  .no-bubble{
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--plum);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .no-bubble.show{ opacity: 1; }
+
+  /* ---------- step 2: choices ---------- */
+  .field-label{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--plum);
+    margin: 20px 0 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .choice-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .choice-grid.thirds{ grid-template-columns: 1fr 1fr; }
+
+  .chip{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 14.5px;
+    background: #fff;
+    border: 2px solid var(--blush);
+    color: var(--plum-soft);
+    border-radius: 16px;
+    padding: 12px 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+
+  .chip .ico{ font-size: 22px; }
+
+  .chip:hover{ border-color: var(--rose); transform: translateY(-1px); }
+
+  .chip.selected{
+    background: linear-gradient(180deg, #fff0f5, var(--blush));
+    border-color: var(--rose);
+    color: var(--rose-dark);
+    box-shadow: 0 4px 12px rgba(255,111,156,0.25);
+  }
+
+  textarea{
+    width: 100%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--plum);
+    border: 2px solid var(--blush);
+    border-radius: 16px;
+    padding: 12px 14px;
+    resize: vertical;
+    min-height: 74px;
+    margin-top: 4px;
+    background: #fffaf7;
+  }
+  textarea:focus{ outline: none; border-color: var(--rose); }
+  textarea::placeholder{ color: #c9b3c4; }
+
+  .submit-btn{
+    margin-top: 26px;
+    width: 100%;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    border: none;
+    border-radius: 999px;
+    padding: 14px;
+    cursor: pointer;
+    background: linear-gradient(180deg, #ff8fb3, var(--rose));
+    color: #fff;
+    box-shadow: 0 8px 0 var(--rose-dark);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  }
+  .submit-btn:hover{ transform: translateY(-2px); }
+  .submit-btn:active{ transform: translateY(2px); box-shadow: 0 4px 0 var(--rose-dark); }
+  .submit-btn:disabled{ opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: 0 8px 0 var(--rose-dark); }
+
+  /* ---------- final ---------- */
+  .final-summary{
+    text-align: left;
+    background: #fff6f0;
+    border: 2px dashed var(--blush);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--plum-soft);
+    line-height: 1.8;
+  }
+  .final-summary b{ color: var(--rose-dark); }
+
+  .paw-divider{
+    letter-spacing: 10px;
+    color: var(--blush);
+    margin: 4px 0 2px;
+  }
+
+  @media (max-width: 420px){
+    .stage{ padding: 32px 20px 26px; border-radius: 26px; }
+    h1{ font-size: 25px; }
+    .mascot{ width: 120px; height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="bg-layer"></div>
+
+<!-- Hidden static copy so Netlify's build-time HTML parser can register the form fields -->
+<form name="date-rsvp" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="date-rsvp">
+  <input name="bot-field">
+  <input type="date" name="date">
+  <input type="text" name="time">
+  <input type="text" name="activity">
+  <textarea name="notes"></textarea>
+</form>
+
+
+<!-- STAGE 1: THE QUESTION -->
+<section class="stage" id="stage1">
+  <span class="eyebrow">🐾 an important question</span>
+
+  <div class="mascot" id="mascot1">
+    <svg viewBox="0 0 150 160">
+      <ellipse cx="75" cy="150" rx="26" ry="8" fill="#4a2b45" opacity="0.08"/>
+      <path class="tail" d="M100 130 Q 145 120 130 75" stroke="#e8a87c" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <ellipse cx="75" cy="110" rx="42" ry="34" fill="#f0bd93"/>
+      <circle cx="75" cy="60" r="38" fill="#e8a87c"/>
+      <path d="M42 40 L30 8 L62 32 Z" fill="#e8a87c"/>
+      <path d="M108 40 L120 8 L88 32 Z" fill="#e8a87c"/>
+      <path d="M46 34 L38 16 L58 30 Z" fill="#ffd6e0"/>
+      <path d="M104 34 L112 16 L92 30 Z" fill="#ffd6e0"/>
+      <g class="eyes">
+        <ellipse cx="60" cy="60" rx="7" ry="9" fill="#4a2b45" class="pupil" id="eyeL"/>
+        <ellipse cx="90" cy="60" rx="7" ry="9" fill="#4a2b45" class="pupil" id="eyeR"/>
+      </g>
+      <ellipse cx="75" cy="74" rx="5" ry="4" fill="#c47f52"/>
+      <path d="M75 78 Q 70 84 64 80" stroke="#4a2b45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M75 78 Q 80 84 86 80" stroke="#4a2b45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <g class="whisker" stroke="#4a2b45" stroke-width="1.6" stroke-linecap="round">
+        <line x1="42" y1="66" x2="14" y2="60"/>
+        <line x1="42" y1="72" x2="14" y2="72"/>
+        <line x1="108" y1="66" x2="136" y2="60"/>
+        <line x1="108" y1="72" x2="136" y2="72"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1>Hey <span class="name">Zy</span> 💕<br>will you go on a date with me?</h1>
+  <p class="sub">There's only one correct answer here... the other button knows it too. 🐈</p>
+
+  <div class="btn-row" id="btnRow">
+    <button class="btn btn-yes" id="yesBtn">Yes! 🐾💖</button>
+    <button class="btn btn-no" id="noBtn">No</button>
+    <div class="no-bubble" id="noBubble">nyaa~ try again 🙀</div>
+  </div>
+</section>
+
+<!-- STAGE 2: DETAILS -->
+<section class="stage hidden" id="stage2">
+  <span class="eyebrow">🐱 yay, she said yes</span>
+  <h1>Perfect! Let's plan it 🌸</h1>
+  <p class="sub">A few purrfect details so I can make it nice for you.</p>
+
+  <form name="date-rsvp" id="rsvpForm" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="date-rsvp">
+    <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+    <div class="field-label">📅 What day?</div>
+    <input type="date" id="dateInput" name="date" required style="width:100%;font-family:'Quicksand',sans-serif;font-size:14.5px;font-weight:700;color:var(--plum);border:2px solid var(--blush);border-radius:16px;padding:12px 14px;background:#fffaf7;">
+
+    <div class="field-label">🕐 When works best?</div>
+    <div class="choice-grid" data-group="time">
+      <button type="button" class="chip" data-value="Afternoon"><span class="ico">☀️</span>Afternoon</button>
+      <button type="button" class="chip" data-value="Evening"><span class="ico">🌙</span>Evening</button>
+    </div>
+    <input type="hidden" name="time" id="timeField">
+
+    <div class="field-label">🐈 What should we do?</div>
+    <div class="choice-grid" data-group="activity">
+      <button type="button" class="chip" data-value="Movie night"><span class="ico">🎬</span>Movie</button>
+      <button type="button" class="chip" data-value="Dinner date"><span class="ico">🍜</span>Dinner</button>
+      <button type="button" class="chip" data-value="Cozy walk"><span class="ico">🌷</span>Walk</button>
+      <button type="button" class="chip" data-value="Surprise me"><span class="ico">🎁</span>Surprise me</button>
+    </div>
+    <input type="hidden" name="activity" id="activityField">
+
+    <div class="field-label">📝 Anything I should know? <span style="font-weight:600;color:var(--plum-soft);font-size:13px;">(allergies, etc.)</span></div>
+    <textarea id="notes" name="notes" placeholder="e.g. allergic to cats (jk), can't do spicy food, need to be home by 9..."></textarea>
+
+    <button type="submit" class="submit-btn" id="submitBtn" disabled>Confirm our date 🐾</button>
+  </form>
+</section>
+
+
+<!-- STAGE 3: CONFIRMATION -->
+<section class="stage hidden" id="stage3">
+  <div class="mascot" id="mascot3">
+    <svg viewBox="0 0 150 160">
+      <ellipse cx="75" cy="150" rx="26" ry="8" fill="#4a2b45" opacity="0.08"/>
+      <path class="tail" d="M100 130 Q 145 120 130 75" stroke="#e8a87c" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <ellipse cx="75" cy="110" rx="42" ry="34" fill="#f0bd93"/>
+      <circle cx="75" cy="60" r="38" fill="#e8a87c"/>
+      <path d="M42 40 L30 8 L62 32 Z" fill="#e8a87c"/>
+      <path d="M108 40 L120 8 L88 32 Z" fill="#e8a87c"/>
+      <path d="M46 34 L38 16 L58 30 Z" fill="#ffd6e0"/>
+      <path d="M104 34 L112 16 L92 30 Z" fill="#ffd6e0"/>
+      <path d="M52 58 Q 60 50 68 58" stroke="#4a2b45" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M82 58 Q 90 50 98 58" stroke="#4a2b45" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="75" cy="74" rx="5" ry="4" fill="#c47f52"/>
+      <path d="M60 82 Q 75 96 90 82" stroke="#4a2b45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <g class="whisker" stroke="#4a2b45" stroke-width="1.6" stroke-linecap="round">
+        <line x1="42" y1="66" x2="14" y2="60"/>
+        <line x1="42" y1="72" x2="14" y2="72"/>
+        <line x1="108" y1="66" x2="136" y2="60"/>
+        <line x1="108" y1="72" x2="136" y2="72"/>
+      </g>
+    </svg>
+  </div>
+  <span class="eyebrow">💌 it's a date</span>
+  <h1>Yay Zy! Can't wait 🥹💕</h1>
+  <p class="sub">Here's what we're locking in:</p>
   <div class="final-summary" id="summaryBox"></div>
   <div class="paw-divider">🐾 🐾 🐾 🐾 🐾</div>
-  <p class="sub" id="mailNote" style="margin-top:14px;font-size:12.5px;">Opening your email app to send the details...</p>
-  <button class="submit-btn" id="resendBtn" style="margin-top:6px;">✉️ Open email again</button>
-
-  <div class="field-label" style="margin-top:22px;justify-content:center;">📅 Save the date</div>
-  <div style="display:flex;gap:10px;">
-    <a id="gcalBtn" href="#" target="_blank" rel="noopener" class="chip" style="flex:1;text-decoration:none;justify-content:center;">
-      <span class="ico">🗓️</span>Google Calendar
-    </a>
-    <button id="icsBtn" class="chip" style="flex:1;justify-content:center;">
-      <span class="ico">⬇️</span>Apple / Outlook (.ics)
-    </button>
-  </div>
   <p class="sub" style="margin-top:14px;">Sent straight to me — I'll see it soon 💌</p>
 </section>
 
 <script>
-@@ -609,88 +598,12 @@ <h1>Yay Zy! Can't wait 🥹💕</h1>
-    submitBtn.disabled = !(state.date && state.time && state.activity);
+  /* ---------------- floating background ---------------- */
+  const bgLayer = document.getElementById('bg-layer');
+  const emojis = ['🐾','💕','🐱','💗','🐈','💖','🌸'];
+  const COUNT = 26;
+  for(let i=0;i<COUNT;i++){
+    const el = document.createElement('div');
+    el.className = 'drift';
+    el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    const size = 14 + Math.random()*22;
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.fontSize = size + 'px';
+    const duration = 10 + Math.random()*14;
+    el.style.animationDuration = duration + 's';
+    el.style.animationDelay = (-Math.random()*duration) + 's';
+    bgLayer.appendChild(el);
   }
 
-  const DEST_EMAIL = 'chrmel75@gmail.com';
+  /* ---------------- mascot eyes follow cursor ---------------- */
+  function setupEyeTracking(mascotId){
+    const mascot = document.getElementById(mascotId);
+    if(!mascot) return;
+    const eyeL = mascot.querySelector('#eyeL');
+    const eyeR = mascot.querySelector('#eyeR');
+    document.addEventListener('mousemove', (e)=>{
+      const rect = mascot.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height*0.35;
+      const dx = Math.max(-1, Math.min(1, (e.clientX - cx)/220));
+      const dy = Math.max(-1, Math.min(1, (e.clientY - cy)/220));
+      const tx = dx*3.5, ty = dy*3;
+      if(eyeL) eyeL.style.transform = `translate(${tx}px, ${ty}px)`;
+      if(eyeR) eyeR.style.transform = `translate(${tx}px, ${ty}px)`;
+    });
+  }
+  setupEyeTracking('mascot1');
+
+  /* ---------------- stage 1: yes / runaway no ---------------- */
+  const stage1 = document.getElementById('stage1');
+  const stage2 = document.getElementById('stage2');
+  const stage3 = document.getElementById('stage3');
+  const btnRow = document.getElementById('btnRow');
+  const noBtn = document.getElementById('noBtn');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBubble = document.getElementById('noBubble');
+
+  let dodgeCount = 0;
+  const bubbleMsgs = [
+    "nyaa~ try again 🙀","not so fast 😼","catch me if you can 🐾",
+    "no is not an option 💅","she said no?? nope 🚫","hehe missed me 🐈"
+  ];
+
+  function randomDodge(){
+    const rowRect = btnRow.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+    const maxX = rowRect.width - btnRect.width - 8;
+    const maxY = 0; // keep vertical simple, mostly horizontal + slight jitter
+    let newX = Math.random() * Math.max(maxX, 40);
+    let newY = (Math.random() - 0.5) * 30;
+    noBtn.style.left = newX + 'px';
+    noBtn.style.transform = `translateY(${newY}px)`;
+
+    dodgeCount++;
+    noBubble.textContent = bubbleMsgs[Math.floor(Math.random()*bubbleMsgs.length)];
+    noBubble.classList.add('show');
+    clearTimeout(randomDodge._t);
+    randomDodge._t = setTimeout(()=> noBubble.classList.remove('show'), 900);
+
+    if(dodgeCount > 4){
+      noBtn.style.fontSize = Math.max(11, 15 - dodgeCount*0.6) + 'px';
+      noBtn.style.padding = '10px ' + Math.max(14, 26 - dodgeCount) + 'px';
+    }
+  }
+
+  // desktop hover dodge
+  noBtn.addEventListener('mouseenter', randomDodge);
+  // mobile: dodge on touch near it
+  noBtn.addEventListener('touchstart', (e)=>{
+    e.preventDefault();
+    randomDodge();
+  }, {passive:false});
+  // also dodge if cursor gets close, for extra cheekiness
+  btnRow.addEventListener('mousemove', (e)=>{
+    const btnRect = noBtn.getBoundingClientRect();
+    const dist = Math.hypot(
+      e.clientX - (btnRect.left+btnRect.width/2),
+      e.clientY - (btnRect.top+btnRect.height/2)
+    );
+    if(dist < 55) randomDodge();
+  });
+
+  function goToStage2(){
+    stage1.classList.add('hidden');
+    stage2.classList.remove('hidden');
+    burstHearts();
+  }
+  yesBtn.addEventListener('click', goToStage2);
+
+  /* little heart burst on yes */
+  function burstHearts(){
+    for(let i=0;i<18;i++){
+      const h = document.createElement('div');
+      h.textContent = '💖';
+      h.style.position='fixed';
+      h.style.left = (45 + Math.random()*10) + 'vw';
+      h.style.top = '45vh';
+      h.style.fontSize = (16+Math.random()*20)+'px';
+      h.style.zIndex = 50;
+      h.style.pointerEvents='none';
+      h.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+      document.body.appendChild(h);
+      requestAnimationFrame(()=>{
+        const angle = Math.random()*Math.PI*2;
+        const dist = 80 + Math.random()*160;
+        h.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist - 60}px) rotate(${(Math.random()-0.5)*180}deg)`;
+        h.style.opacity = '0';
+      });
+      setTimeout(()=> h.remove(), 1050);
+    }
+  }
+
+  /* ---------------- stage 2: choices ---------------- */
+  const state = { date: null, time: null, activity: null, notes: '' };
+  const submitBtn = document.getElementById('submitBtn');
+  const dateInput = document.getElementById('dateInput');
+  const todayStr = new Date().toISOString().split('T')[0];
+  dateInput.min = todayStr;
+  dateInput.addEventListener('change', ()=>{
+    state.date = dateInput.value;
+    checkReady();
+  });
+
+  document.querySelectorAll('.choice-grid').forEach(group=>{
+    const key = group.dataset.group;
+    const hiddenField = document.getElementById(key + 'Field');
+    group.querySelectorAll('.chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        group.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+        chip.classList.add('selected');
+        state[key] = chip.dataset.value;
+        if(hiddenField) hiddenField.value = chip.dataset.value;
+        checkReady();
+      });
+    });
+  });
+
+  const notesEl = document.getElementById('notes');
+  notesEl.addEventListener('input', ()=>{ state.notes = notesEl.value.trim(); });
+
+  function checkReady(){
+    submitBtn.disabled = !(state.date && state.time && state.activity);
+  }
 
   function niceDate(dstr){
     if(!dstr) return '';
@@ -29,108 +604,51 @@
     return new Date(y, m-1, d).toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
   }
 
-  function buildMailto(){
-    const subject = "Zy said yes! 🐾 Date details";
-    const bodyLines = [
-      "Zy confirmed the date! 💕",
-      "",
-      `Day: ${niceDate(state.date)}`,
-      `When: ${state.time}`,
-      `Plan: ${state.activity}`,
-      `Good to know: ${state.notes ? state.notes : 'nothing noted'}`
-    ];
-    const body = bodyLines.join('\n');
-    return `mailto:${DEST_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }
-
-  const pad = n => n.toString().padStart(2,'0');
-
-  function getEventWindow(){
-    if(!state.date) return null;
-    const [y,m,d] = state.date.split('-').map(Number);
-    const hour = state.time === 'Evening' ? 19 : 14; // 7pm evening, 2pm afternoon
-    const start = new Date(y, m-1, d, hour, 0, 0);
-    const end = new Date(start.getTime() + 2*60*60*1000);
-    return { start, end };
-  }
-
-  function fmtICS(dt){
-    return `${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
-  }
-
-  function buildICS(){
-    const win = getEventWindow();
-    if(!win) return null;
-    const now = new Date();
-    const stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
-    const desc = `Plan: ${state.activity}\\nGood to know: ${state.notes ? state.notes : 'nothing noted'}`;
-    return [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//Zy Date Invite//EN',
-      'BEGIN:VEVENT',
-      `UID:${Date.now()}@zy-date`,
-      `DTSTAMP:${stamp}`,
-      `DTSTART:${fmtICS(win.start)}`,
-      `DTEND:${fmtICS(win.end)}`,
-      'SUMMARY:Date with Zy \\ud83d\\udc3e\\ud83d\\udc95',
-      `DESCRIPTION:${desc}`,
-      'END:VEVENT',
-      'END:VCALENDAR'
-    ].join('\r\n');
-  }
-
-  function downloadICS(){
-    const ics = buildICS();
-    if(!ics) return;
-    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'zy-date.ics';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  function googleCalendarUrl(){
-    const win = getEventWindow();
-    if(!win) return '#';
-    const dates = `${fmtICS(win.start)}/${fmtICS(win.end)}`;
-    const text = encodeURIComponent('Date with Zy 🐾💕');
-    const details = encodeURIComponent(`Plan: ${state.activity}${state.notes ? ' | Good to know: ' + state.notes : ''}`);
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}`;
-  }
-
   function encodeFormData(data){
     return Object.keys(data)
       .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
-@@ -718,7 +631,7 @@ <h1>Yay Zy! Can't wait 🥹💕</h1>
+      .join('&');
+  }
+
+  const rsvpForm = document.getElementById('rsvpForm');
+
+  rsvpForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    if(submitBtn.disabled) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending... 🐾';
+
+    // Submit to Netlify Forms so the RSVP is captured in the site's Forms dashboard
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encodeFormData({
+        'form-name': 'date-rsvp',
+        date: state.date,
+        time: state.time,
+        activity: state.activity,
         notes: state.notes
       })
     })
-    .catch(err => console.warn('Netlify form submission failed, falling back to email only:', err))
     .catch(err => console.warn('Netlify form submission failed:', err))
     .finally(showConfirmation);
   });
 
-@@ -734,18 +647,7 @@ <h1>Yay Zy! Can't wait 🥹💕</h1>
+  function showConfirmation(){
+    stage2.classList.add('hidden');
+    stage3.classList.remove('hidden');
+    setupEyeTracking('mascot3');
+    burstHearts();
+
+    const summary = document.getElementById('summaryBox');
+    summary.innerHTML =
+      `📅 <b>Day:</b> ${niceDate(state.date)}<br>` +
       `🕐 <b>When:</b> ${state.time}<br>` +
       `🐈 <b>Plan:</b> ${state.activity}<br>` +
       `📝 <b>Good to know:</b> ${state.notes ? state.notes.replace(/</g,'&lt;') : 'nothing noted — good to go!'}`;
-
-    document.getElementById('gcalBtn').href = googleCalendarUrl();
-
-    // Also open the visitor's email client with the details pre-filled, addressed to chrmel75@gmail.com
-    window.location.href = buildMailto();
   }
-
-  document.getElementById('resendBtn').addEventListener('click', ()=>{
-    window.location.href = buildMailto();
-  });
-
-  document.getElementById('icsBtn').addEventListener('click', downloadICS);
 </script>
 
-</body>  
+</body>
+</html>
