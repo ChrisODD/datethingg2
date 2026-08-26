@@ -1,0 +1,136 @@
+<p class="sub">Here's what we're locking in:</p>
+  <div class="final-summary" id="summaryBox"></div>
+  <div class="paw-divider">🐾 🐾 🐾 🐾 🐾</div>
+  <p class="sub" id="mailNote" style="margin-top:14px;font-size:12.5px;">Opening your email app to send the details...</p>
+  <button class="submit-btn" id="resendBtn" style="margin-top:6px;">✉️ Open email again</button>
+
+  <div class="field-label" style="margin-top:22px;justify-content:center;">📅 Save the date</div>
+  <div style="display:flex;gap:10px;">
+    <a id="gcalBtn" href="#" target="_blank" rel="noopener" class="chip" style="flex:1;text-decoration:none;justify-content:center;">
+      <span class="ico">🗓️</span>Google Calendar
+    </a>
+    <button id="icsBtn" class="chip" style="flex:1;justify-content:center;">
+      <span class="ico">⬇️</span>Apple / Outlook (.ics)
+    </button>
+  </div>
+  <p class="sub" style="margin-top:14px;">Sent straight to me — I'll see it soon 💌</p>
+</section>
+
+<script>
+@@ -609,88 +598,12 @@ <h1>Yay Zy! Can't wait 🥹💕</h1>
+    submitBtn.disabled = !(state.date && state.time && state.activity);
+  }
+
+  const DEST_EMAIL = 'chrmel75@gmail.com';
+
+  function niceDate(dstr){
+    if(!dstr) return '';
+    const [y,m,d] = dstr.split('-').map(Number);
+    return new Date(y, m-1, d).toLocaleDateString(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  }
+
+  function buildMailto(){
+    const subject = "Zy said yes! 🐾 Date details";
+    const bodyLines = [
+      "Zy confirmed the date! 💕",
+      "",
+      `Day: ${niceDate(state.date)}`,
+      `When: ${state.time}`,
+      `Plan: ${state.activity}`,
+      `Good to know: ${state.notes ? state.notes : 'nothing noted'}`
+    ];
+    const body = bodyLines.join('\n');
+    return `mailto:${DEST_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  const pad = n => n.toString().padStart(2,'0');
+
+  function getEventWindow(){
+    if(!state.date) return null;
+    const [y,m,d] = state.date.split('-').map(Number);
+    const hour = state.time === 'Evening' ? 19 : 14; // 7pm evening, 2pm afternoon
+    const start = new Date(y, m-1, d, hour, 0, 0);
+    const end = new Date(start.getTime() + 2*60*60*1000);
+    return { start, end };
+  }
+
+  function fmtICS(dt){
+    return `${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
+  }
+
+  function buildICS(){
+    const win = getEventWindow();
+    if(!win) return null;
+    const now = new Date();
+    const stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth()+1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
+    const desc = `Plan: ${state.activity}\\nGood to know: ${state.notes ? state.notes : 'nothing noted'}`;
+    return [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Zy Date Invite//EN',
+      'BEGIN:VEVENT',
+      `UID:${Date.now()}@zy-date`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART:${fmtICS(win.start)}`,
+      `DTEND:${fmtICS(win.end)}`,
+      'SUMMARY:Date with Zy \\ud83d\\udc3e\\ud83d\\udc95',
+      `DESCRIPTION:${desc}`,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+  }
+
+  function downloadICS(){
+    const ics = buildICS();
+    if(!ics) return;
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'zy-date.ics';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function googleCalendarUrl(){
+    const win = getEventWindow();
+    if(!win) return '#';
+    const dates = `${fmtICS(win.start)}/${fmtICS(win.end)}`;
+    const text = encodeURIComponent('Date with Zy 🐾💕');
+    const details = encodeURIComponent(`Plan: ${state.activity}${state.notes ? ' | Good to know: ' + state.notes : ''}`);
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${details}`;
+  }
+
+  function encodeFormData(data){
+    return Object.keys(data)
+      .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+@@ -718,7 +631,7 @@ <h1>Yay Zy! Can't wait 🥹💕</h1>
+        notes: state.notes
+      })
+    })
+    .catch(err => console.warn('Netlify form submission failed, falling back to email only:', err))
+    .catch(err => console.warn('Netlify form submission failed:', err))
+    .finally(showConfirmation);
+  });
+
+@@ -734,18 +647,7 @@ <h1>Yay Zy! Can't wait 🥹💕</h1>
+      `🕐 <b>When:</b> ${state.time}<br>` +
+      `🐈 <b>Plan:</b> ${state.activity}<br>` +
+      `📝 <b>Good to know:</b> ${state.notes ? state.notes.replace(/</g,'&lt;') : 'nothing noted — good to go!'}`;
+
+    document.getElementById('gcalBtn').href = googleCalendarUrl();
+
+    // Also open the visitor's email client with the details pre-filled, addressed to chrmel75@gmail.com
+    window.location.href = buildMailto();
+  }
+
+  document.getElementById('resendBtn').addEventListener('click', ()=>{
+    window.location.href = buildMailto();
+  });
+
+  document.getElementById('icsBtn').addEventListener('click', downloadICS);
+</script>
+
+</body>  
