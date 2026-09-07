@@ -3,37 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Question for Caitlin 🐾</title>
+<title>Round Two Caitlin? 🦊✨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream: #fff6ef;
-    --blush: #ffdbe6;
-    --rose: #ff6f9c;
-    --rose-dark: #e2497a;
-    --caramel: #e8a87c;
-    --caramel-dark: #c47f52;
-    --plum: #4a2b45;
-    --plum-soft: #7a5673;
-    --mint: #bfe9d7;
-    --shadow: rgba(74, 43, 69, 0.18);
+    --midnight-1: #1c1836;
+    --midnight-2: #2c2350;
+    --card: #fff9ef;
+    --ink: #2a2144;
+    --ink-soft: #6b5f8a;
+    --amber: #f2a65a;
+    --amber-dark: #d97f30;
+    --blush: #f2c9d1;
+    --blush-line: #f0d9df;
+    --sky-glow: rgba(242, 166, 90, 0.18);
   }
 
   *{ box-sizing: border-box; }
 
-  html, body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  html, body{ margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden; }
 
   body{
-    font-family: 'Quicksand', sans-serif;
-    background: radial-gradient(circle at 20% 20%, #fff0e9, var(--cream) 45%),
-                linear-gradient(160deg, var(--cream), var(--blush) 120%);
-    color: var(--plum);
+    font-family: 'Nunito', sans-serif;
+    background:
+      radial-gradient(ellipse at 50% -10%, var(--sky-glow), transparent 55%),
+      linear-gradient(180deg, var(--midnight-1), var(--midnight-2) 100%);
+    color: var(--ink);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -42,31 +38,35 @@
     padding: 24px;
   }
 
-  /* ---------- floating background ---------- */
-  #bg-layer{
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
+  /* ---------- night sky background ---------- */
+  #bg-layer{ position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+
+  .twinkle{
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.9; }
   }
 
   .drift{
     position: absolute;
     bottom: -60px;
-    opacity: 0.55;
+    opacity: 0;
     animation-name: floatUp;
     animation-timing-function: ease-in;
     animation-iteration-count: infinite;
-    filter: drop-shadow(0 4px 6px rgba(74,43,69,0.08));
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
     user-select: none;
   }
-
   @keyframes floatUp{
     0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.6; }
-    90%  { opacity: 0.5; }
-    100% { transform: translateY(-115vh) rotate(360deg); opacity: 0; }
+    12%  { opacity: 0.7; }
+    88%  { opacity: 0.55; }
+    100% { transform: translateY(-115vh) rotate(220deg); opacity: 0; }
   }
 
   /* ---------- card ---------- */
@@ -74,21 +74,17 @@
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 480px;
-    background: #fffdfb;
-    border-radius: 32px;
+    max-width: 500px;
+    background: var(--card);
+    border-radius: 30px;
     padding: 40px 32px 34px;
-    box-shadow: 0 24px 60px var(--shadow), 0 2px 0 #fff inset;
+    box-shadow: 0 30px 70px rgba(10, 6, 30, 0.45), 0 2px 0 #fff inset;
     border: 3px solid #ffffff;
-    outline: 6px solid rgba(255, 214, 224, 0.6);
+    outline: 6px solid rgba(242, 166, 90, 0.25);
     text-align: center;
     animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1);
   }
-
-  @keyframes popIn{
-    from{ transform: scale(0.85); opacity: 0; }
-    to{ transform: scale(1); opacity: 1; }
-  }
+  @keyframes popIn{ from{ transform: scale(0.85); opacity: 0; } to{ transform: scale(1); opacity: 1; } }
 
   .hidden{ display: none !important; }
 
@@ -96,58 +92,34 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
     font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--rose-dark);
-    background: var(--blush);
+    color: var(--amber-dark);
+    background: #fdeee0;
     padding: 6px 14px;
     border-radius: 999px;
     margin-bottom: 14px;
   }
 
   h1{
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    font-size: 30px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 29px;
     line-height: 1.25;
     margin: 0 0 8px;
-    color: var(--plum);
+    color: var(--ink);
   }
+  h1 .name{ color: var(--amber-dark); }
 
-  h1 .name{ color: var(--rose-dark); }
+  p.sub{ font-size: 15px; color: var(--ink-soft); margin: 0 0 22px; line-height: 1.55; }
 
-  p.sub{
-    font-size: 15px;
-    color: var(--plum-soft);
-    margin: 0 0 22px;
-    line-height: 1.5;
-  }
-
-  /* ---------- mascot cat ---------- */
-  .mascot{
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 6px;
-    position: relative;
-  }
-
+  /* ---------- fox mascot ---------- */
+  .mascot{ width: 150px; height: 150px; margin: 0 auto 6px; position: relative; }
   .mascot svg{ width: 100%; height: 100%; overflow: visible; }
-
   .pupil{ transition: transform 0.12s ease-out; }
-
-  .tail{
-    transform-origin: 60px 150px;
-    animation: wag 2.4s ease-in-out infinite;
-  }
-  @keyframes wag{
-    0%, 100% { transform: rotate(-8deg); }
-    50%      { transform: rotate(10deg); }
-  }
-
-  .whisker{ opacity: 0.55; }
+  .tail{ transform-origin: 115px 130px; animation: wag 2.6s ease-in-out infinite; }
+  @keyframes wag{ 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(8deg); } }
 
   /* ---------- buttons row ---------- */
   .btn-row{
@@ -161,8 +133,8 @@
   }
 
   .btn{
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
     font-size: 17px;
     border: none;
     border-radius: 999px;
@@ -173,18 +145,18 @@
   }
 
   .btn-yes{
-    background: linear-gradient(180deg, #ff8fb3, var(--rose));
-    color: #fff;
-    box-shadow: 0 8px 0 var(--rose-dark);
+    background: linear-gradient(180deg, #f7bb7c, var(--amber));
+    color: #3a2410;
+    box-shadow: 0 8px 0 var(--amber-dark);
   }
   .btn-yes:hover{ transform: translateY(-2px) scale(1.06); }
-  .btn-yes:active{ transform: translateY(2px); box-shadow: 0 4px 0 var(--rose-dark); }
+  .btn-yes:active{ transform: translateY(2px); box-shadow: 0 4px 0 var(--amber-dark); }
 
   .btn-no{
     background: #fff;
-    color: var(--plum-soft);
-    border: 2px solid var(--blush);
-    box-shadow: 0 6px 0 var(--blush);
+    color: var(--ink-soft);
+    border: 2px solid var(--blush-line);
+    box-shadow: 0 6px 0 var(--blush-line);
     position: absolute;
     left: 50%;
     transform: translateX(56px);
@@ -195,7 +167,7 @@
     top: -34px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--plum);
+    background: var(--ink);
     color: #fff;
     font-size: 12px;
     font-weight: 600;
@@ -208,116 +180,122 @@
   }
   .no-bubble.show{ opacity: 1; }
 
-  /* ---------- step 2: choices ---------- */
+  /* ---------- step 2: form ---------- */
   .field-label{
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
     font-size: 15px;
-    color: var(--plum);
+    color: var(--ink);
     margin: 20px 0 10px;
     text-align: left;
     display: flex;
     align-items: center;
     gap: 6px;
   }
+  .field-label:first-of-type{ margin-top: 4px; }
+  .field-hint{ font-weight: 600; color: var(--ink-soft); font-size: 12.5px; }
 
-  .choice-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+  .text-input{
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+    border: 2px solid var(--blush-line);
+    border-radius: 16px;
+    padding: 12px 14px;
+    background: #fffcf7;
   }
+  .text-input:focus{ outline: none; border-color: var(--amber); }
+  .text-input::placeholder{ color: #c3b5c8; font-weight: 600; }
 
-  .choice-grid.thirds{ grid-template-columns: 1fr 1fr; }
+  .choice-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .choice-grid.cols-3{ grid-template-columns: 1fr 1fr 1fr; }
 
   .chip{
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 700;
-    font-size: 14.5px;
+    font-size: 13.5px;
     background: #fff;
-    border: 2px solid var(--blush);
-    color: var(--plum-soft);
+    border: 2px solid var(--blush-line);
+    color: var(--ink-soft);
     border-radius: 16px;
-    padding: 12px 8px;
+    padding: 12px 6px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
     transition: all 0.15s ease;
+    line-height: 1.2;
   }
-
-  .chip .ico{ font-size: 22px; }
-
-  .chip:hover{ border-color: var(--rose); transform: translateY(-1px); }
-
+  .chip .ico{ font-size: 21px; }
+  .chip:hover{ border-color: var(--amber); transform: translateY(-1px); }
   .chip.selected{
-    background: linear-gradient(180deg, #fff0f5, var(--blush));
-    border-color: var(--rose);
-    color: var(--rose-dark);
-    box-shadow: 0 4px 12px rgba(255,111,156,0.25);
+    background: linear-gradient(180deg, #fef3e6, #fdeacb);
+    border-color: var(--amber);
+    color: var(--amber-dark);
+    box-shadow: 0 4px 12px rgba(242,166,90,0.3);
   }
 
   textarea{
     width: 100%;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 14.5px;
     font-weight: 600;
-    color: var(--plum);
-    border: 2px solid var(--blush);
+    color: var(--ink);
+    border: 2px solid var(--blush-line);
     border-radius: 16px;
     padding: 12px 14px;
     resize: vertical;
-    min-height: 74px;
+    min-height: 68px;
     margin-top: 4px;
-    background: #fffaf7;
+    background: #fffcf7;
   }
-  textarea:focus{ outline: none; border-color: var(--rose); }
-  textarea::placeholder{ color: #c9b3c4; }
+  textarea:focus{ outline: none; border-color: var(--amber); }
+  textarea::placeholder{ color: #c3b5c8; }
 
   .submit-btn{
     margin-top: 26px;
     width: 100%;
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
     font-size: 17px;
     border: none;
     border-radius: 999px;
     padding: 14px;
     cursor: pointer;
-    background: linear-gradient(180deg, #ff8fb3, var(--rose));
-    color: #fff;
-    box-shadow: 0 8px 0 var(--rose-dark);
+    background: linear-gradient(180deg, #f7bb7c, var(--amber));
+    color: #3a2410;
+    box-shadow: 0 8px 0 var(--amber-dark);
     transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
   }
   .submit-btn:hover{ transform: translateY(-2px); }
-  .submit-btn:active{ transform: translateY(2px); box-shadow: 0 4px 0 var(--rose-dark); }
-  .submit-btn:disabled{ opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: 0 8px 0 var(--rose-dark); }
+  .submit-btn:active{ transform: translateY(2px); box-shadow: 0 4px 0 var(--amber-dark); }
+  .submit-btn:disabled{ opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: 0 8px 0 var(--amber-dark); }
 
   /* ---------- final ---------- */
   .final-summary{
     text-align: left;
-    background: #fff6f0;
-    border: 2px dashed var(--blush);
+    background: #fdf5e9;
+    border: 2px dashed var(--blush-line);
     border-radius: 18px;
     padding: 16px 18px;
     margin-top: 18px;
     font-size: 14px;
     font-weight: 600;
-    color: var(--plum-soft);
+    color: var(--ink-soft);
     line-height: 1.8;
   }
-  .final-summary b{ color: var(--rose-dark); }
+  .final-summary b{ color: var(--amber-dark); }
 
-  .paw-divider{
-    letter-spacing: 10px;
-    color: var(--blush);
-    margin: 4px 0 2px;
-  }
+  .star-divider{ letter-spacing: 10px; color: var(--blush-line); margin: 4px 0 2px; }
 
   @media (max-width: 420px){
     .stage{ padding: 32px 20px 26px; border-radius: 26px; }
-    h1{ font-size: 25px; }
+    h1{ font-size: 24px; }
     .mascot{ width: 120px; height: 120px; }
+    .choice-grid.cols-3{ grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
@@ -326,141 +304,180 @@
 <div id="bg-layer"></div>
 
 <!-- Hidden static copy so Netlify's build-time HTML parser can register the form fields -->
-<form name="contact" netlify class="hidden">
-  <p>
-    <label><input type="text" name="name" /></label>
-  </p>
-  <p>
-    <label><input type="email" name="email" /></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
+<form name="date-rsvp-2" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="date-rsvp-2">
+  <input name="bot-field">
+  <input type="date" name="date">
+  <input type="text" name="time">
+  <input type="text" name="activity">
+  <input type="text" name="rating">
+  <input type="text" name="vibe">
+  <textarea name="notes"></textarea>
 </form>
-
 
 <!-- STAGE 1: THE QUESTION -->
 <section class="stage" id="stage1">
-  <span class="eyebrow">🐾 an important question</span>
+  <span class="eyebrow">🦊 round two</span>
 
   <div class="mascot" id="mascot1">
     <svg viewBox="0 0 150 160">
-      <ellipse cx="75" cy="150" rx="26" ry="8" fill="#4a2b45" opacity="0.08"/>
-      <path class="tail" d="M100 130 Q 145 120 130 75" stroke="#e8a87c" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <ellipse cx="75" cy="110" rx="42" ry="34" fill="#f0bd93"/>
-      <circle cx="75" cy="60" r="38" fill="#e8a87c"/>
-      <path d="M42 40 L30 8 L62 32 Z" fill="#e8a87c"/>
-      <path d="M108 40 L120 8 L88 32 Z" fill="#e8a87c"/>
-      <path d="M46 34 L38 16 L58 30 Z" fill="#ffd6e0"/>
-      <path d="M104 34 L112 16 L92 30 Z" fill="#ffd6e0"/>
+      <ellipse cx="75" cy="150" rx="28" ry="8" fill="#1c1836" opacity="0.12"/>
+      <path class="tail" d="M100 128 Q 150 128 138 78" stroke="#e8874a" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path class="tail" d="M100 128 Q 150 128 138 78" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" transform="translate(-3,10) scale(0.5)" transform-origin="115 130" opacity="0"/>
+      <ellipse cx="75" cy="112" rx="40" ry="32" fill="#f3934f"/>
+      <ellipse cx="75" cy="122" rx="22" ry="16" fill="#fff6e9"/>
+      <circle cx="75" cy="62" r="36" fill="#f3934f"/>
+      <ellipse cx="75" cy="76" rx="16" ry="12" fill="#fff6e9"/>
+      <path d="M40 44 L26 8 L60 34 Z" fill="#f3934f"/>
+      <path d="M110 44 L124 8 L90 34 Z" fill="#f3934f"/>
+      <path d="M44 38 L36 18 L56 32 Z" fill="#2a2144"/>
+      <path d="M106 38 L114 18 L94 32 Z" fill="#2a2144"/>
       <g class="eyes">
-        <ellipse cx="60" cy="60" rx="7" ry="9" fill="#4a2b45" class="pupil" id="eyeL"/>
-        <ellipse cx="90" cy="60" rx="7" ry="9" fill="#4a2b45" class="pupil" id="eyeR"/>
+        <ellipse cx="60" cy="60" rx="6.5" ry="8.5" fill="#2a2144" class="pupil" id="eyeL"/>
+        <ellipse cx="90" cy="60" rx="6.5" ry="8.5" fill="#2a2144" class="pupil" id="eyeR"/>
       </g>
-      <ellipse cx="75" cy="74" rx="5" ry="4" fill="#c47f52"/>
-      <path d="M75 78 Q 70 84 64 80" stroke="#4a2b45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <path d="M75 78 Q 80 84 86 80" stroke="#4a2b45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <g class="whisker" stroke="#4a2b45" stroke-width="1.6" stroke-linecap="round">
+      <path d="M75 72 L69 82 L81 82 Z" fill="#2a2144"/>
+      <path d="M75 82 Q 70 87 64 84" stroke="#2a2144" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+      <path d="M75 82 Q 80 87 86 84" stroke="#2a2144" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+      <g stroke="#2a2144" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
         <line x1="42" y1="66" x2="14" y2="60"/>
         <line x1="42" y1="72" x2="14" y2="72"/>
         <line x1="108" y1="66" x2="136" y2="60"/>
         <line x1="108" y1="72" x2="136" y2="72"/>
       </g>
+      <text x="106" y="34" font-size="18">✨</text>
+      <text x="20" y="30" font-size="14">⭐</text>
     </svg>
   </div>
 
-  <h1>Hey <span class="name">Caitlin</span> 💕<br>will you go on a date with me?</h1>
-  <p class="sub">There's only one correct answer here... the other button knows it too. 🐈</p>
+  <h1>Hey <span class="name">you</span> — first date went well, huh? 😌<br>ready for round two?</h1>
+  <p class="sub">One button leads to another great night out. The other one is just... shy.</p>
 
   <div class="btn-row" id="btnRow">
-    <button class="btn btn-yes" id="yesBtn">Yes! 🐾💖</button>
+    <button class="btn btn-yes" id="yesBtn">Yes, obviously 🦊✨</button>
     <button class="btn btn-no" id="noBtn">No</button>
-    <div class="no-bubble" id="noBubble">nyaa~ try again 🙀</div>
+    <div class="no-bubble" id="noBubble">nope, try again ✨</div>
   </div>
 </section>
 
 <!-- STAGE 2: DETAILS -->
 <section class="stage hidden" id="stage2">
-  <span class="eyebrow">🐱 yay, she said yes</span>
-  <h1>Perfect! Let's plan it 🌸</h1>
-  <p class="sub">A few purrfect details so I can make it nice for you.</p>
+  <span class="eyebrow">🌙 locking it in</span>
+  <h1>Let's plan date two 🌟</h1>
+  <p class="sub">Since we're already off to a good start, let's make this one even better.</p>
 
-  <form name="date-rsvp" id="rsvpForm" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="date-rsvp">
+  <form name="date-rsvp-2" id="rsvpForm" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="date-rsvp-2">
     <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
 
-    <div class="field-label">📅 What day?</div>
-    <input type="date" id="dateInput" name="date" required style="width:100%;font-family:'Quicksand',sans-serif;font-size:14.5px;font-weight:700;color:var(--plum);border:2px solid var(--blush);border-radius:16px;padding:12px 14px;background:#fffaf7;">
+    <div class="field-label">📅 What day works?</div>
+    <input type="date" id="dateInput" name="date" required class="text-input">
 
-    <div class="field-label">🕐 When works best?</div>
-    <div class="choice-grid" data-group="time">
+    <div class="field-label">🕐 When's good?</div>
+    <div class="choice-grid cols-3" data-group="time">
+      <button type="button" class="chip" data-value="Morning"><span class="ico">🌤️</span>Morning</button>
       <button type="button" class="chip" data-value="Afternoon"><span class="ico">☀️</span>Afternoon</button>
-      <button type="button" class="chip" data-value="Evening"><span class="ico">🌙</span>Evening</button>
+      <button type="button" class="chip" data-value="Evening"><span class="ico">🌇</span>Evening</button>
+      <button type="button" class="chip" data-value="Late night"><span class="ico">🌙</span>Late night</button>
     </div>
     <input type="hidden" name="time" id="timeField">
 
-    <div class="field-label">🐈 What should we do?</div>
-    <div class="choice-grid" data-group="activity">
-      <button type="button" class="chip" data-value="Movie night"><span class="ico">🎬</span>Movie</button>
-      <button type="button" class="chip" data-value="Dinner date"><span class="ico">🍜</span>Dinner</button>
-      <button type="button" class="chip" data-value="Cozy walk"><span class="ico">🌷</span>Walk</button>
+    <div class="field-label">🦊 What should we do this time?</div>
+    <div class="choice-grid cols-3" data-group="activity">
+      <button type="button" class="chip" data-value="Stargazing picnic"><span class="ico">🌌</span>Stargazing</button>
+      <button type="button" class="chip" data-value="Gym"><span class="ico">🏋️</span>Gym</button>
+      <button type="button" class="chip" data-value="Bowling"><span class="ico">🎳</span>Bowling</button>
+      <button type="button" class="chip" data-value="Board game cafe"><span class="ico">🎲</span>Games</button>
+      <button type="button" class="chip" data-value="Live music"><span class="ico">🎶</span>Live music</button>
       <button type="button" class="chip" data-value="Surprise me"><span class="ico">🎁</span>Surprise me</button>
     </div>
     <input type="hidden" name="activity" id="activityField">
 
-    <div class="field-label">📝 Anything I should know? <span style="font-weight:600;color:var(--plum-soft);font-size:13px;">(allergies, etc.)</span></div>
+    <div class="field-label">⭐ Rate date one <span class="field-hint">(no pressure)</span></div>
+    <div class="choice-grid" data-group="rating">
+      <button type="button" class="chip" data-value="Amazing"><span class="ico">🥰</span>Amazing</button>
+      <button type="button" class="chip" data-value="So good"><span class="ico">😍</span>So good</button>
+      <button type="button" class="chip" data-value="Can't stop thinking about it"><span class="ico">🫠</span>Can't stop thinking about it</button>
+      <button type="button" class="chip" data-value="I'm just here for round two"><span class="ico">😏</span>Just here for round two</button>
+    </div>
+    <input type="hidden" name="rating" id="ratingField">
+
+    <div class="field-label">🎵 Any vibe you're feeling? <span class="field-hint">(optional)</span></div>
+    <input type="text" id="vibeInput" name="vibe" class="text-input" placeholder="e.g. low-key, dressed up, adventurous...">
+
+    <div class="field-label">📝 Anything I should know? <span class="field-hint">(allergies, etc.)</span></div>
     <textarea id="notes" name="notes" placeholder="e.g. allergic to cats (jk), can't do spicy food, need to be home by 9..."></textarea>
 
-    <button type="submit" class="submit-btn" id="submitBtn" disabled>Confirm our date 🐾</button>
+    <button type="submit" class="submit-btn" id="submitBtn" disabled>Confirm round two 🦊</button>
   </form>
 </section>
-
 
 <!-- STAGE 3: CONFIRMATION -->
 <section class="stage hidden" id="stage3">
   <div class="mascot" id="mascot3">
     <svg viewBox="0 0 150 160">
-      <ellipse cx="75" cy="150" rx="26" ry="8" fill="#4a2b45" opacity="0.08"/>
-      <path class="tail" d="M100 130 Q 145 120 130 75" stroke="#e8a87c" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <ellipse cx="75" cy="110" rx="42" ry="34" fill="#f0bd93"/>
-      <circle cx="75" cy="60" r="38" fill="#e8a87c"/>
-      <path d="M42 40 L30 8 L62 32 Z" fill="#e8a87c"/>
-      <path d="M108 40 L120 8 L88 32 Z" fill="#e8a87c"/>
-      <path d="M46 34 L38 16 L58 30 Z" fill="#ffd6e0"/>
-      <path d="M104 34 L112 16 L92 30 Z" fill="#ffd6e0"/>
-      <path d="M52 58 Q 60 50 68 58" stroke="#4a2b45" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M82 58 Q 90 50 98 58" stroke="#4a2b45" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <ellipse cx="75" cy="74" rx="5" ry="4" fill="#c47f52"/>
-      <path d="M60 82 Q 75 96 90 82" stroke="#4a2b45" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      <g class="whisker" stroke="#4a2b45" stroke-width="1.6" stroke-linecap="round">
+      <ellipse cx="75" cy="150" rx="28" ry="8" fill="#1c1836" opacity="0.12"/>
+      <path class="tail" d="M100 128 Q 150 128 138 78" stroke="#e8874a" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <ellipse cx="75" cy="112" rx="40" ry="32" fill="#f3934f"/>
+      <ellipse cx="75" cy="122" rx="22" ry="16" fill="#fff6e9"/>
+      <circle cx="75" cy="62" r="36" fill="#f3934f"/>
+      <ellipse cx="75" cy="76" rx="16" ry="12" fill="#fff6e9"/>
+      <path d="M40 44 L26 8 L60 34 Z" fill="#f3934f"/>
+      <path d="M110 44 L124 8 L90 34 Z" fill="#f3934f"/>
+      <path d="M44 38 L36 18 L56 32 Z" fill="#2a2144"/>
+      <path d="M106 38 L114 18 L94 32 Z" fill="#2a2144"/>
+      <path d="M52 58 Q 60 50 68 58" stroke="#2a2144" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M82 58 Q 90 50 98 58" stroke="#2a2144" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M75 72 L69 82 L81 82 Z" fill="#2a2144"/>
+      <path d="M60 86 Q 75 98 90 86" stroke="#2a2144" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+      <g stroke="#2a2144" stroke-width="1.5" stroke-linecap="round" opacity="0.5">
         <line x1="42" y1="66" x2="14" y2="60"/>
         <line x1="42" y1="72" x2="14" y2="72"/>
         <line x1="108" y1="66" x2="136" y2="60"/>
         <line x1="108" y1="72" x2="136" y2="72"/>
       </g>
+      <text x="106" y="34" font-size="18">✨</text>
+      <text x="20" y="30" font-size="14">⭐</text>
     </svg>
   </div>
-  <span class="eyebrow">💌 it's a date</span>
-  <h1>Yay! Can't wait 🥹💕</h1>
-  <p class="sub">Here's what we're locking in:</p>
+  <span class="eyebrow">💌 it's official</span>
+  <h1>Round two, locked in 🥹✨</h1>
+  <p class="sub">Here's what we're planning:</p>
   <div class="final-summary" id="summaryBox"></div>
-  <div class="paw-divider">🐾 🐾 🐾 🐾 🐾</div>
+  <div class="star-divider">✨ 🌙 ✨ 🌙 ✨</div>
   <p class="sub" style="margin-top:14px;">Sent straight to me — I'll see it soon 💌</p>
 </section>
 
 <script>
-  /* ---------------- floating background ---------------- */
+  /* ---------------- night sky background ---------------- */
   const bgLayer = document.getElementById('bg-layer');
-  const emojis = ['🐾','💕','🐱','💗','🐈','💖','🌸'];
-  const COUNT = 26;
+
+  // twinkling stars
+  const STAR_COUNT = 46;
+  for(let i=0;i<STAR_COUNT;i++){
+    const s = document.createElement('div');
+    s.className = 'twinkle';
+    const size = 1 + Math.random()*2.6;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.top = Math.random()*70 + 'vh';
+    s.style.animationDuration = (2 + Math.random()*3) + 's';
+    s.style.animationDelay = (-Math.random()*4) + 's';
+    bgLayer.appendChild(s);
+  }
+
+  // drifting emoji
+  const emojis = ['✨','🌙','⭐','💫','🦊','💛'];
+  const COUNT = 22;
   for(let i=0;i<COUNT;i++){
     const el = document.createElement('div');
     el.className = 'drift';
     el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-    const size = 14 + Math.random()*22;
+    const size = 13 + Math.random()*20;
     el.style.left = Math.random()*100 + 'vw';
     el.style.fontSize = size + 'px';
-    const duration = 10 + Math.random()*14;
+    const duration = 11 + Math.random()*15;
     el.style.animationDuration = duration + 's';
     el.style.animationDelay = (-Math.random()*duration) + 's';
     bgLayer.appendChild(el);
@@ -496,15 +513,14 @@
 
   let dodgeCount = 0;
   const bubbleMsgs = [
-    "nyaa~ try again 🙀","not so fast 😼","catch me if you can 🐾",
-    "no is not an option 💅","she said no?? nope 🚫","hehe missed me 🐈"
+    "nope, try again ✨","not so fast 🦊","catch me if you can 🌙",
+    "no is not on the menu 💫","she said no?? nope 🚫","hehe missed me ⭐"
   ];
 
   function randomDodge(){
     const rowRect = btnRow.getBoundingClientRect();
     const btnRect = noBtn.getBoundingClientRect();
     const maxX = rowRect.width - btnRect.width - 8;
-    const maxY = 0; // keep vertical simple, mostly horizontal + slight jitter
     let newX = Math.random() * Math.max(maxX, 40);
     let newY = (Math.random() - 0.5) * 30;
     noBtn.style.left = newX + 'px';
@@ -522,14 +538,8 @@
     }
   }
 
-  // desktop hover dodge
   noBtn.addEventListener('mouseenter', randomDodge);
-  // mobile: dodge on touch near it
-  noBtn.addEventListener('touchstart', (e)=>{
-    e.preventDefault();
-    randomDodge();
-  }, {passive:false});
-  // also dodge if cursor gets close, for extra cheekiness
+  noBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); randomDodge(); }, {passive:false});
   btnRow.addEventListener('mousemove', (e)=>{
     const btnRect = noBtn.getBoundingClientRect();
     const dist = Math.hypot(
@@ -542,15 +552,15 @@
   function goToStage2(){
     stage1.classList.add('hidden');
     stage2.classList.remove('hidden');
-    burstHearts();
+    burstSparkles();
   }
   yesBtn.addEventListener('click', goToStage2);
 
-  /* little heart burst on yes */
-  function burstHearts(){
+  function burstSparkles(){
+    const emo = ['✨','🌟','💫'];
     for(let i=0;i<18;i++){
       const h = document.createElement('div');
-      h.textContent = '💖';
+      h.textContent = emo[Math.floor(Math.random()*emo.length)];
       h.style.position='fixed';
       h.style.left = (45 + Math.random()*10) + 'vw';
       h.style.top = '45vh';
@@ -570,15 +580,15 @@
   }
 
   /* ---------------- stage 2: choices ---------------- */
-  const state = { date: null, time: null, activity: null, notes: '' };
+  const state = { date: null, time: null, activity: null, rating: null, vibe: '', notes: '' };
   const submitBtn = document.getElementById('submitBtn');
   const dateInput = document.getElementById('dateInput');
+  const vibeInput = document.getElementById('vibeInput');
   const todayStr = new Date().toISOString().split('T')[0];
   dateInput.min = todayStr;
-  dateInput.addEventListener('change', ()=>{
-    state.date = dateInput.value;
-    checkReady();
-  });
+
+  dateInput.addEventListener('change', ()=>{ state.date = dateInput.value; checkReady(); });
+  vibeInput.addEventListener('input', ()=>{ state.vibe = vibeInput.value.trim(); });
 
   document.querySelectorAll('.choice-grid').forEach(group=>{
     const key = group.dataset.group;
@@ -620,17 +630,18 @@
     if(submitBtn.disabled) return;
 
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending... 🐾';
+    submitBtn.textContent = 'Sending... 🦊';
 
-    // Submit to Netlify Forms so the RSVP is captured in the site's Forms dashboard
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encodeFormData({
-        'form-name': 'date-rsvp',
+        'form-name': 'date-rsvp-2',
         date: state.date,
         time: state.time,
         activity: state.activity,
+        rating: state.rating || '',
+        vibe: state.vibe || '',
         notes: state.notes
       })
     })
@@ -642,13 +653,15 @@
     stage2.classList.add('hidden');
     stage3.classList.remove('hidden');
     setupEyeTracking('mascot3');
-    burstHearts();
+    burstSparkles();
 
     const summary = document.getElementById('summaryBox');
     summary.innerHTML =
       `📅 <b>Day:</b> ${niceDate(state.date)}<br>` +
       `🕐 <b>When:</b> ${state.time}<br>` +
-      `🐈 <b>Plan:</b> ${state.activity}<br>` +
+      `🦊 <b>Plan:</b> ${state.activity}<br>` +
+      (state.rating ? `⭐ <b>Date one review:</b> ${state.rating.replace(/</g,'&lt;')}<br>` : '') +
+      (state.vibe ? `🎵 <b>Vibe:</b> ${state.vibe.replace(/</g,'&lt;')}<br>` : '') +
       `📝 <b>Good to know:</b> ${state.notes ? state.notes.replace(/</g,'&lt;') : 'nothing noted — good to go!'}`;
   }
 </script>
